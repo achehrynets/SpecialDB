@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="PostgreSQL - myDB@localhost">
+  <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.6">
+    <database id="1" name="myDB">
+      <object-id>16384</object-id>
+      <visible>1</visible>
+    </database>
+    <database id="2" name="postgres">
+      <object-id>12415</object-id>
+    </database>
+    <database id="3" name="jo1nsaint">
+      <object-id>16397</object-id>
+    </database>
+    <schema id="4" parent="1" name="public">
+      <object-id>2200</object-id>
+      <visible>1</visible>
+      <introspection-state-number>708</introspection-state-number>
+      <introspection-timestamp>2017-02-21.17:30:19.218</introspection-timestamp>
+    </schema>
+    <schema id="5" parent="1" name="pg_catalog">
+      <object-id>11</object-id>
+    </schema>
+    <schema id="6" parent="1" name="pg_toast">
+      <object-id>99</object-id>
+    </schema>
+    <schema id="7" parent="1" name="pg_temp_1">
+      <object-id>11816</object-id>
+    </schema>
+    <schema id="8" parent="1" name="pg_toast_temp_1">
+      <object-id>11817</object-id>
+    </schema>
+    <schema id="9" parent="1" name="information_schema">
+      <object-id>12123</object-id>
+    </schema>
+    <sequence id="10" parent="4" name="client_u_id_seq">
+      <object-id>16385</object-id>
+      <state-number>664</state-number>
+    </sequence>
+    <sequence id="11" parent="4" name="order_seq">
+      <object-id>16411</object-id>
+      <state-number>694</state-number>
+    </sequence>
+    <sequence id="12" parent="4" name="payment_seq">
+      <object-id>16413</object-id>
+      <state-number>695</state-number>
+    </sequence>
+    <sequence id="13" parent="4" name="product_seq">
+      <object-id>16457</object-id>
+      <state-number>702</state-number>
+    </sequence>
+    <sequence id="14" parent="4" name="product_type_seq">
+      <object-id>16448</object-id>
+      <state-number>700</state-number>
+    </sequence>
+    <object-type id="15" parent="4" name="role">
+      <object-id>16399</object-id>
+      <state-number>670</state-number>
+      <sub-kind>ENUM</sub-kind>
+      <sub-category>ENUM</sub-category>
+      <labels>admin,client,user,moder</labels>
+    </object-type>
+    <table id="16" parent="4" name="client">
+      <object-id>16387</object-id>
+      <state-number>699</state-number>
+    </table>
+    <table id="17" parent="4" name="orders">
+      <object-id>16432</object-id>
+      <state-number>706</state-number>
+    </table>
+    <table id="18" parent="4" name="orders_product">
+      <object-id>16484</object-id>
+      <state-number>706</state-number>
+    </table>
+    <table id="19" parent="4" name="payment_type">
+      <object-id>16415</object-id>
+      <state-number>699</state-number>
+    </table>
+    <table id="20" parent="4" name="product">
+      <object-id>16470</object-id>
+      <state-number>706</state-number>
+    </table>
+    <table id="21" parent="4" name="product_type">
+      <object-id>16450</object-id>
+      <state-number>705</state-number>
+    </table>
+    <column id="22" parent="16" name="client_id">
+      <state-number>708</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;client_u_id_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="23" parent="16" name="name">
+      <state-number>664</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="24" parent="16" name="surname">
+      <state-number>664</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="25" parent="16" name="birthday">
+      <state-number>664</state-number>
+      <data-type>date|0</data-type>
+    </column>
+    <column id="26" parent="16" name="login">
+      <state-number>664</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="27" parent="16" name="password">
+      <state-number>664</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(18)|0</data-type>
+    </column>
+    <column id="28" parent="16" name="email">
+      <state-number>707</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="29" parent="16" name="phone">
+      <state-number>664</state-number>
+      <data-type>varchar(13)|0</data-type>
+      <default-expression>0</default-expression>
+    </column>
+    <column id="30" parent="16" name="valid">
+      <state-number>664</state-number>
+      <data-type>boolean|0</data-type>
+      <default-expression>false</default-expression>
+    </column>
+    <column id="31" parent="16" name="role">
+      <state-number>685</state-number>
+      <data-type>varchar(10)|0</data-type>
+    </column>
+    <index id="32" parent="16" name="client_pkey">
+      <object-id>16394</object-id>
+      <columns>client_id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="33" parent="16" name="client_pkey">
+      <object-id>16395</object-id>
+      <columns>client_id</columns>
+      <underlying-index>client_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="34" parent="17" name="orders_id">
+      <state-number>699</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;order_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="35" parent="17" name="client_id">
+      <state-number>699</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="36" parent="17" name="payment_type_id">
+      <state-number>699</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <index id="37" parent="17" name="orders_pkey">
+      <object-id>16436</object-id>
+      <columns>orders_id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="38" parent="17" name="orders_pkey">
+      <object-id>16437</object-id>
+      <columns>orders_id</columns>
+      <underlying-index>orders_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="39" parent="17" name="orders_client_id_fkey">
+      <object-id>16438</object-id>
+      <columns>client_id</columns>
+      <ref-key>~.client.client_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="40" parent="17" name="orders_payment_type_id_fkey">
+      <object-id>16443</object-id>
+      <columns>payment_type_id</columns>
+      <ref-key>~.payment_type.payment_type_payment_type_id_pk</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="41" parent="18" name="orders_id">
+      <state-number>706</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="42" parent="18" name="product_id">
+      <state-number>706</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="43" parent="18" name="quantity">
+      <state-number>706</state-number>
+      <mandatory>1</mandatory>
+      <data-type>smallint|0</data-type>
+    </column>
+    <column id="44" parent="18" name="sum_price">
+      <state-number>706</state-number>
+      <mandatory>1</mandatory>
+      <data-type>double precision|0</data-type>
+    </column>
+    <foreign-key id="45" parent="18" name="orders_product_orders_id_fkey">
+      <object-id>16487</object-id>
+      <columns>orders_id</columns>
+      <ref-key>~.orders.orders_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="46" parent="18" name="orders_product_product_id_fkey">
+      <object-id>16492</object-id>
+      <columns>product_id</columns>
+      <ref-key>~.product.product_pkey</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="47" parent="19" name="payment_type_id">
+      <state-number>696</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;payment_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="48" parent="19" name="payment_name">
+      <state-number>696</state-number>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <index id="49" parent="19" name="payment_type_payment_type_id_pk">
+      <object-id>16430</object-id>
+      <columns>payment_type_id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="50" parent="19" name="payment_type_payment_type_id_pk">
+      <object-id>16431</object-id>
+      <columns>payment_type_id</columns>
+      <underlying-index>payment_type_payment_type_id_pk</underlying-index>
+      <primary>1</primary>
+    </key>
+    <column id="51" parent="20" name="product_id">
+      <state-number>705</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;product_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="52" parent="20" name="product_name">
+      <state-number>705</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="53" parent="20" name="product_description">
+      <state-number>705</state-number>
+      <mandatory>1</mandatory>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="54" parent="20" name="product_quantity">
+      <state-number>705</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+    </column>
+    <column id="55" parent="20" name="product_price">
+      <state-number>705</state-number>
+      <mandatory>1</mandatory>
+      <data-type>double precision|0</data-type>
+    </column>
+    <column id="56" parent="20" name="product_image_url">
+      <state-number>705</state-number>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="57" parent="20" name="product_type_id">
+      <state-number>705</state-number>
+      <data-type>integer|0</data-type>
+    </column>
+    <index id="58" parent="20" name="product_pkey">
+      <object-id>16477</object-id>
+      <columns>product_id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="59" parent="20" name="product_pkey">
+      <object-id>16478</object-id>
+      <columns>product_id</columns>
+      <underlying-index>product_pkey</underlying-index>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="60" parent="20" name="product_product_type_id_fkey">
+      <object-id>16479</object-id>
+      <columns>product_type_id</columns>
+      <ref-key>~.product_type.product_type_product_type_id_pk</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <column id="61" parent="21" name="product_type_id">
+      <state-number>701</state-number>
+      <mandatory>1</mandatory>
+      <data-type>integer|0</data-type>
+      <default-expression>nextval(&apos;product_type_seq&apos;::regclass)</default-expression>
+    </column>
+    <column id="62" parent="21" name="product_type_name">
+      <state-number>701</state-number>
+      <mandatory>1</mandatory>
+      <data-type>varchar(32)|0</data-type>
+    </column>
+    <column id="63" parent="21" name="product_type_description">
+      <state-number>701</state-number>
+      <data-type>text|0</data-type>
+    </column>
+    <index id="64" parent="21" name="product_type_product_type_id_pk">
+      <object-id>16468</object-id>
+      <columns>product_type_id</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="65" parent="21" name="product_type_product_type_id_pk">
+      <object-id>16469</object-id>
+      <columns>product_type_id</columns>
+      <underlying-index>product_type_product_type_id_pk</underlying-index>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
