@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Client {
 
-    private Integer client_id;
+    private int client_id;
     private String name;
     private String surname;
     private Date birthday;
@@ -19,7 +19,7 @@ public class Client {
     private String role;
     private Boolean valid;
 
-    public Integer getClient_id() {
+    public int getClient_id() {
         return this.client_id;
     }
 

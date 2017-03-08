@@ -1,3 +1,7 @@
+import DAO.ClientDAOImpl;
+import DAO.DAOInterfaces.ClientDAO;
+import Entity.Client;
+
 import java.sql.*;
 
 /**
@@ -30,7 +34,7 @@ public class TestClass {
 
         Statement statement = null;
         ResultSet resultSet = null;
-
+        ClientDAO dao = new ClientDAOImpl();
         try {
             statement = connection.createStatement();
             resultSet = statement.executeQuery("SELECT * FROM client;");

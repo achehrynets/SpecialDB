@@ -9,26 +9,23 @@ import java.util.List;
 
 public class ClientDAOImpl implements ClientDAO {
 
-    private final static String INSERT_CLIENT = "INSERT INTO client (name, surname, birthday, login, password, " +
-            "mail, phone, valid, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    private final static String INSERT_CLIENT = "INSERT INTO client (client_name, client_surname, client_birthday," +
+            " client_login, client_password, client_email, client_phone, client_valid, client_role)" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
     private final static String GET_CLIENT_BY_ID = "SELECT * FROM client WHERE client_id = ?;";
     private final static String GET_ALL_CLIENT = "SELECT * FROM client;";
     private final static String DELETE_CLIENT_BY_ID = "DELETE FROM client WHERE client_id = ?;";
-    private final static String UPDATE_CLIENT_PASSWORD = "UPDATE client SET password = ? WHERE client_id = ?";
-    private final static String UPDATE_CLIENT_EMAIL = "UPDATE client SET email = ? WHERE client_id = ?";
-    private final static String UPDATE_CLIENT_PHONE = "UPDATE client SET phone = ? WHERE client_id = ?";
-    private final static String FIND_CLIENT_BY_LOGIN_AND_PASSWORD = "SELECT * FROM client WHERE login = ? AND password = ?";
+    private final static String UPDATE_CLIENT_PASSWORD = "UPDATE client SET client_password = ? WHERE client_id = ?";
+    private final static String UPDATE_CLIENT_EMAIL = "UPDATE client SET client_email = ? WHERE client_id = ?";
+    private final static String UPDATE_CLIENT_PHONE = "UPDATE client SET client_phone = ? WHERE client_id = ?";
+    private final static String FIND_CLIENT_BY_LOGIN_AND_PASSWORD = "SELECT * FROM client WHERE client_login = ? " +
+            "AND client_password = ?";
 
-    private JDBCConnect connect = new JDBCConnect();
-    private Connection con = connect.getConnection();
+    private Connection con;
 
-    private void closeConnection() {
-            try {
-                con.close();
-            } catch (SQLException ex) {
-                System.out.println("Error in closing connection");
-                ex.printStackTrace();
-            }
+    public ClientDAOImpl() {
+        JDBCConnect jdbcConnect = new JDBCConnect();
+        con = jdbcConnect.getConnection();
     }
 
     private PreparedStatement getPreparedStatement(String sql) {
@@ -66,21 +63,21 @@ public class ClientDAOImpl implements ClientDAO {
     public List<Client> getAllClient() {
         PreparedStatement ps = getPreparedStatement(GET_ALL_CLIENT);
         ResultSet rs = null;
-        List clientsList = new ArrayList();
-        Client client = null;
+        List<Client> clientsList = new ArrayList<Client>();
         try {
             rs = ps.executeQuery();
-            while (!rs.next()) {
+            Client client;
+            while (rs.next()) {
                 client = new Client();
-                client.setClient_id(rs.getInt(1));
-                client.setName(rs.getString(2));
-                client.setSurname(rs.getString(3));
-                client.setBirthday(rs.getDate(4));
-                client.setLogin(rs.getString(5));
-                client.setEmail(rs.getString(6));
-                client.setPhone(rs.getString(7));
-                client.setValid(rs.getBoolean(8));
-                client.setRole(rs.getString(9));
+                client.setClient_id(rs.getInt("client_id"));
+                client.setName(rs.getString("client_name"));
+                client.setSurname(rs.getString("client_surname"));
+                client.setBirthday(rs.getDate("client_birthday"));
+                client.setLogin(rs.getString("client_login"));
+                client.setEmail(rs.getString("client_email"));
+                client.setPhone(rs.getString("client_phone"));
+                client.setValid(rs.getBoolean("client_valid"));
+                client.setRole(rs.getString("client_role"));
                 clientsList.add(client);
             }
         } catch (SQLException ex) {
@@ -90,7 +87,6 @@ public class ClientDAOImpl implements ClientDAO {
             closeResultSet(rs);
             closePreparedStatement(ps);
         }
-
 
         return clientsList;
     }
@@ -103,16 +99,16 @@ public class ClientDAOImpl implements ClientDAO {
             ps.setInt(1, id);
             rs = ps.executeQuery();
             rs.next();
-            client.setClient_id(rs.getInt(1));
-            client.setName(rs.getString(2));
-            client.setSurname(rs.getString(3));
-            client.setBirthday(rs.getDate(4));
-            client.setLogin(rs.getString(5));
-            client.setPassword(rs.getString(6));
-            client.setEmail(rs.getString(7));
-            client.setPhone(rs.getString(8));
-            client.setValid(rs.getBoolean(9));
-            client.setRole(rs.getString(10));
+            client.setClient_id(rs.getInt("client_id"));
+            client.setName(rs.getString("client_name"));
+            client.setSurname(rs.getString("client_surname"));
+            client.setBirthday(rs.getDate("client_birthday"));
+            client.setLogin(rs.getString("client_login"));
+            client.setPassword(rs.getString("client_password"));
+            client.setEmail(rs.getString("client_email"));
+            client.setPhone(rs.getString("client_phone"));
+            client.setValid(rs.getBoolean("client_valid"));
+            client.setRole(rs.getString("client_role"));
 
         } catch (SQLException ex) {
             System.out.println("Error in getClientById");
@@ -206,25 +202,30 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     public Client findClientByLoginAndPassword(String login, String password) {
-        Client client = new Client();
+        Client client = null;
+        System.out.println(login + " ~~~~ " + password);
         PreparedStatement ps = getPreparedStatement(FIND_CLIENT_BY_LOGIN_AND_PASSWORD);
         ResultSet rs = null;
         try {
             ps.setString(1, login);
             ps.setString(2, password);
-            //Check
             rs = ps.executeQuery();
-            rs.next();
-            client.setClient_id(rs.getInt(1));
-            client.setName(rs.getString(2));
-            client.setSurname(rs.getString(3));
-            client.setBirthday(rs.getDate(4));
-            client.setLogin(rs.getString(5));
-            client.setPassword(rs.getString(6));
-            client.setEmail(rs.getString(7));
-            client.setPhone(rs.getString(8));
-            client.setValid(rs.getBoolean(9));
-            client.setRole(rs.getString(10));
+            if (rs.next()) {
+                client = new Client();
+                client.setClient_id(rs.getInt("client_id"));
+                client.setName(rs.getString("client_name"));
+                client.setSurname(rs.getString("client_surname"));
+                client.setBirthday(rs.getDate("client_birthday"));
+                client.setLogin(rs.getString("client_login"));
+                client.setPassword(rs.getString("client_password"));
+                client.setEmail(rs.getString("client_email"));
+                client.setPhone(rs.getString("client_phone"));
+                client.setValid(rs.getBoolean("client_valid"));
+                client.setRole(rs.getString("client_role"));
+                System.out.println(client.toString());
+            } else {
+                client = null;
+            }
         } catch (SQLException ex) {
             System.out.println("Error in findClient");
             ex.printStackTrace();
